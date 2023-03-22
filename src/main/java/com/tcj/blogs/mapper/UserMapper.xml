@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tcj.blogs.mapper.UserMapper">
+    <select id="findUser" parameterType="com.tcj.blogs.entity.User" resultType="com.tcj.blogs.entity.User">
+        select user_name, password, mailbox
+        from user
+        where mailbox = #{user.mailBox}
+        and password = #{user.passWord};
+    </select>
+
+</mapper>
