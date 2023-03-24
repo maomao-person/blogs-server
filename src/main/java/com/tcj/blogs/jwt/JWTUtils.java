@@ -21,7 +21,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class JWTUtils {
 
-    private static ReadApplicationProperties readConfig;
+    private final ReadApplicationProperties readConfig;
 
     public String getToken(String userName) {
 
@@ -31,6 +31,8 @@ public class JWTUtils {
         header.put("typ", "JWT");
 
         Date issuedTime = new Date();
+        System.out.println(issuedTime.getTime());
+        System.out.println(readConfig.getJwtTimeout());
         Date expiredTime = new Date(issuedTime.getTime() + readConfig.getJwtTimeout() * 1000);
 
         builder.withHeader(header);

@@ -2,7 +2,7 @@ package com.tcj.blogs.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.tcj.blogs.common.WebUICommonResponse;
-import com.tcj.blogs.entity.User;
+import com.tcj.blogs.entity.login.LoginArguments;
 import com.tcj.blogs.service.UserService;
 import com.tcj.blogs.utils.StatusCode;
 import lombok.AllArgsConstructor;
@@ -23,17 +23,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public WebUICommonResponse login(@RequestBody User user) {
+    public WebUICommonResponse login(@RequestBody LoginArguments loginArguments) {
         WebUICommonResponse response = WebUICommonResponse.getInstance();
-        if (StringUtils.isEmpty(user.getMailBox()) && StringUtils.isEmpty(user.getPassWord())) {
+        if (StringUtils.isEmpty(loginArguments.getMailBox()) && StringUtils.isEmpty(loginArguments.getPassWord())) {
             response.setStatusCode(StatusCode.DealFail.getCode());
             response.setStatusDesc(StatusCode.DealFail.getMsg());
         }
-        System.out.println(user);
-        if (userService.findUser(user)!=null) {
+        System.out.println(loginArguments);
+        if (userService.findUser(loginArguments)!=null) {
             response.setStatusCode(StatusCode.DealSuccess.getCode());
             response.setStatusDesc(StatusCode.DealSuccess.getMsg());
-            response.setResult(userService.findUser(user));
+            response.setResult(userService.findUser(loginArguments));
         }
         return response;
     }
