@@ -11,6 +11,8 @@ public enum StatusCode {
 
     DealFail("-1", "deal fail"),
     OtherError("000", "other error"),
+    FailureCode("102","验证码已失效"),
+    FaultCode("103","验证码错误"),
     ;
     private String code;
     private String msg;

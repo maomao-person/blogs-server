@@ -31,8 +31,6 @@ public class JWTUtils {
         header.put("typ", "JWT");
 
         Date issuedTime = new Date();
-        System.out.println(issuedTime.getTime());
-        System.out.println(readConfig.getJwtTimeout());
         Date expiredTime = new Date(issuedTime.getTime() + readConfig.getJwtTimeout() * 1000);
 
         builder.withHeader(header);
@@ -43,7 +41,6 @@ public class JWTUtils {
 
     public boolean verifyToken(String token) {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(readConfig.getJwtSecret())).build();
-
         DecodedJWT jwt = jwtVerifier.verify(token);
         return true;
     }

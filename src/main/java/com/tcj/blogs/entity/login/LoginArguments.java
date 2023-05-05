@@ -6,4 +6,5 @@ import lombok.Data;
 public class LoginArguments {
     private String passWord;
     private String mailBox;
+    private String securityCode;
 }

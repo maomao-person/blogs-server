@@ -5,25 +5,39 @@ import com.tcj.blogs.redis.RedisUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class BlogsApplicationTests {
     @Autowired
     private RedisUtils redisUtils;
-//    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private JavaMailSenderImpl mailSender;
+
+    //    private StringRedisTemplate stringRedisTemplate;
     @Test
     void contextLoads() {
-        VerificationCode verificationCode=new VerificationCode("6666666");
-        redisUtils.set("code",verificationCode,1);
+//        VerificationCode verificationCode = new VerificationCode("6666666");
+//        redisUtils.set("code", 1233, 1);
     }
+
     @Test
     void contextLoads1() {
-        System.out.println(redisUtils.getExpirationTime("code"));
+        System.out.println(redisUtils.get("code"));
+    }
+
+    @Test
+    void contextLoads2() throws Exception{
+//简单邮件
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("2392008736@qq.com");
+        simpleMailMessage.setTo("434941849@qq.com");
+        simpleMailMessage.setSubject("Happy New Year");
+        simpleMailMessage.setText("新年快乐！");
+        mailSender.send(simpleMailMessage);
+
     }
 
 }

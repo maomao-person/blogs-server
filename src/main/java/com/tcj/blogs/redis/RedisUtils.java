@@ -13,10 +13,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisUtils {
     @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
-    public void set(String key, Object obj, int time) {
-        redisTemplate.opsForValue().set(key, obj, time, TimeUnit.MINUTES);
+    public void set(String key, String code, int time) {
+        redisTemplate.opsForValue().set(key, code, time, TimeUnit.MINUTES);
         if (get(key) == null) {
             log.info("{}-存入redis失败", key);
         } else {
@@ -24,7 +24,7 @@ public class RedisUtils {
         }
     }
 
-    public Object get(String key) {
+    public String get(String key) {
         return redisTemplate.opsForValue().get(key);
     }
 

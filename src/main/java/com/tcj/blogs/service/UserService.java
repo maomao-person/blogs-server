@@ -8,4 +8,6 @@ public interface UserService {
     LoginResponse findUser(LoginArguments loginArguments);
 
     User insertUser(User user);
+    void sendAuthCode(LoginArguments loginArguments);
+    int verifyCode(String num ,String mail);
 }

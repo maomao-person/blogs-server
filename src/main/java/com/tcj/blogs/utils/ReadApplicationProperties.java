@@ -15,4 +15,8 @@ public class ReadApplicationProperties {
     private String jwtSecret;
     @Value("${cross.origin.maxAge}")
     private Integer maxAge;
+    @Value("${spring.mail.from}")
+    private String from;
+    @Value("${mail.timeout}")
+    private Integer mailTimeout;
 }
